@@ -244,9 +244,16 @@ const logFinished = () => {
 
 const logError = ({ error }) => {
   if (error.type === 'fatal' && error.message) {
-    console.log(error);
+    console.log(error.message);
   }
-  log.error(error);
+  switch (error.code) {
+    case 1004:
+      break;
+
+    default:
+      log.error(error);
+      break;
+  }
 };
 
 console.log('### Waiting for Cronjob');
